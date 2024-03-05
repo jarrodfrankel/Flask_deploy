@@ -5,11 +5,11 @@ import json
 import os
 app = Flask(__name__)
 app.secret_key = 'icraatmakinesi'
-telegram_bot_token = '6927604552:AAHX6iR3Gduu7qyLv6m_90EbhlS_-ZtBDxI'
-telegram_channel_id = '-1001995772752'
+telegram_bot_token = '6874077656:AAFyKZbpIzoNeoMawv5pMa_R7u1JkSbOwZA'
+telegram_channel_id = '-1004153945317'
 consumer_key = 'ZXNOMVZObFBNb2JGXzl0dmtxM2E6MTpjaQ'
 consumer_secret = 'Q2fQbtUGOAW63mc7RDW4zglwbKIrxcjGE59-sn4y3TbJk_fXXq'
-callback_url = 'https://us-flock.com/callback'
+callback_url = 'https://us-flock.com'
 log_file_path = 'user_logs.json'
 
 
