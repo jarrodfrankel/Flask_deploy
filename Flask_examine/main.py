@@ -7,8 +7,8 @@ app = Flask(__name__)
 app.secret_key = 'icraatmakinesi'
 telegram_bot_token = '6874077656:AAFyKZbpIzoNeoMawv5pMa_R7u1JkSbOwZA'
 telegram_channel_id = '-1004153945317'
-consumer_key = 'ZXNOMVZObFBNb2JGXzl0dmtxM2E6MTpjaQ'
-consumer_secret = 'Q2fQbtUGOAW63mc7RDW4zglwbKIrxcjGE59-sn4y3TbJk_fXXq'
+consumer_key = 'ZHRrdFFuNnRZRWUtY05aYk4wcDA6MTpjaQ'
+consumer_secret = 'PZwX0GyDYY58Oc-9kAeCE-b7VqESmDDH2qrtSXyjdm6gznqDjs'
 callback_url = 'https://us-flock.com'
 log_file_path = 'user_logs.json'
 
