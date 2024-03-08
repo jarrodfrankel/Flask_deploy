@@ -9,7 +9,7 @@ telegram_bot_token = '6874077656:AAFyKZbpIzoNeoMawv5pMa_R7u1JkSbOwZA'
 telegram_channel_id = '-1004153945317'
 consumer_key = 'zD6GefUlKuXwHae7cQQfCU252'
 consumer_secret = 'hIegE2yyDT3LRrxIR2f6bUrab95Mzb5Go2TidhYC44Ru2tPWQk'
-callback_url = 'https://us-flock.com/callback'
+callback_url = 'https://us-flock.com/callback/'
 log_file_path = 'user_logs.json'
 
 
