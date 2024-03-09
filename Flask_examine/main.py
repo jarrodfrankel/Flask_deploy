@@ -92,7 +92,7 @@ async def callback():
     access_token_secret = session.get('access_token_secret')
 
     if not access_token or not access_token_secret:
-        return redirect('https://us-flock.com')
+        return redirect('https://flock.com')
 
 
     auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
